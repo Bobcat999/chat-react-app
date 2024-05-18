@@ -1,0 +1,20 @@
+.sign-out{
+    position:absolute;
+    right: 0;
+    top: 0;
+    background-color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: .5rem;
+    padding: .5rem;
+    margin: .5rem;
+    border: none;
+
+    transition: all .5s;
+}
+
+.sign-out:hover{
+    background-color: grey;
+    color: white;
+    transform: scale(1.2);
+}

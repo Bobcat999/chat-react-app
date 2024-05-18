@@ -1,0 +1,39 @@
+.message{
+    margin: 3px;
+    max-width: 20rem;
+    background-color: rgb(0, 0, 0);
+    color:white;
+    border-radius: .5rem;
+
+    transition: all .2s ease-out;
+}
+
+.message:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 0px 8px #2d2d2d;
+}
+
+.sender{
+    padding: 0 .5rem;
+    text-emphasis: bold;
+    font-size: 1.2em;
+}
+
+.content{
+    margin: 0;
+    padding: 0 .5rem;
+    padding-bottom: .5rem;
+    text-wrap: wrap;
+}
+
+.owner{
+    background-color: rgb(44, 90, 176);
+    align-self: flex-end;
+    text-align: right;
+}
+
+.recipient{
+    background-color: rgb(26, 26, 26);
+    align-self: flex-start;
+    text-align: left;
+}

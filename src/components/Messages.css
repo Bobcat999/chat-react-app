@@ -1,0 +1,22 @@
+.messages{
+    background-color: rgb(92, 92, 92);
+    box-shadow: 0px 0px 16px #3a3a3a;
+    width: 80%;
+    border-radius: 1rem;
+    flex-grow: 1;
+    overflow: scroll;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.messages::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .messages {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }

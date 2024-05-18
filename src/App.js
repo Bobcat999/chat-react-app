@@ -1,23 +1,52 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
+import { Route, BrowserRouter, Routes, useNavigate, useLocation} from 'react-router-dom';
 import './App.css';
+import { Conversation } from './components/Conversation';
+import { SignIn } from './pages/SignIn';
+import Cookies from 'universal-cookie';
+import { SelectChat } from './pages/SelectChat';
+import { SignOut } from './components/SignOut';
+import { signOut } from 'firebase/auth';
+import { auth } from './utils/firebase';
+import { ChatsPage } from './pages/ChatsPage';
+import { CreateChat } from './pages/CreateChat';
+const cookies = new Cookies();
 
 function App() {
+  const [isAuth, setIsAuth] = useState(cookies.get('auth-token'));
+  const navagate = useNavigate();
+
+  // useEffect(() => {
+  //   if(location.pathname.includes("/chat/")) {
+  //     let tmp = location.pathname.slice(location.pathname.lastIndexOf("/") + 1, location.pathname.length) ;
+  //     setChatId(tmp);
+  //   }else{
+  //     setChatId(null);
+  //     navagate("/selectChat/");
+  //   }
+  // }, [location]);
+
+  const handleSignOut = async () => {
+    await signOut(auth);
+    setIsAuth(null);
+    cookies.remove('auth-token');
+    navagate("/");
+  }
+
+  if (!isAuth){
+    return <div className='App'>
+      <SignIn setIsAuth={setIsAuth}/>
+    </div>;
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path="/" exact Component={SelectChat}/>
+        <Route path="/create/" Component={CreateChat}/>
+        <Route path="/chats/" Component={ChatsPage}/>
+      </Routes>
+      <SignOut onSignOut={handleSignOut}/>
     </div>
   );
 }
