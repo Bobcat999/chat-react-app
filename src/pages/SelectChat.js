@@ -36,7 +36,7 @@ export const SelectChat = ({onSetChat}) => {
 
     return (
         <div className='select-chat'>
-            Select Chat - Github Deploy Test
+            Select Chat
             <input className='chat-box' type="text" value={chat} onChange={handleChange} onKeyDown={handleChatSelect}/>
         </div>
     );
