@@ -6,7 +6,7 @@ export const Messages = ({messages, user}) => {
   const messagesRef = useRef();
 
   useEffect(() => {
-    messagesRef.current?.lastElementChild?.scrollIntoView();
+    messagesRef.current?.lastElementChild?.scrollIntoView({behavior: "smooth"});
   }, [messages]);
 
   return (
