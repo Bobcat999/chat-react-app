@@ -1,5 +1,5 @@
 .select-chat{
-    background-color: white;
+    background-color: var(--clr-white);
     border-radius: 2rem;
     font-size: 4rem;
     font-weight: bold;

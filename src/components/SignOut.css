@@ -2,7 +2,7 @@
     position:absolute;
     right: 0;
     top: 0;
-    background-color: white;
+    background-color: var(--clr-white);
     font-size: 1rem;
     font-weight: bold;
     border-radius: .5rem;
@@ -14,7 +14,7 @@
 }
 
 .sign-out:hover{
-    background-color: grey;
-    color: white;
+    background-color: var(--clr-light);
+    color: var(--clr-white);
     transform: scale(1.2);
 }

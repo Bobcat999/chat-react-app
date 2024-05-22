@@ -1,3 +1,11 @@
+:root{
+  --clr-white: white;
+  --clr-light: rgb(92, 92, 92);
+  --clr-dark: rgb(55, 55, 55);
+  --clr-primary: rgb(44, 90, 176);
+}
+
 body {
-  background-color: rgb(41, 41, 41);
+  background-color: var(--clr-dark);
+  height: 100vh;
 }

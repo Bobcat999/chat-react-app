@@ -1,5 +1,5 @@
-.conversation{
-    background-color: rgb(66, 66, 66);
+.chat-page{
+    background-color: var(--clr-dark);
     display: flex;
     flex-direction: column;
     justify-content: stretch;

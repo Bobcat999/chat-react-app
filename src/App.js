@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Route, BrowserRouter, Routes, useNavigate, useLocation} from 'react-router-dom';
 import './App.css';
-import { Conversation } from './components/Conversation';
 import { SignIn } from './pages/SignIn';
 import Cookies from 'universal-cookie';
 import { SelectChat } from './pages/SelectChat';
 import { SignOut } from './components/SignOut';
 import { signOut } from 'firebase/auth';
 import { auth } from './utils/firebase';
-import { ChatsPage } from './pages/ChatsPage';
+import { ChatPage } from './pages/ChatPage';
 import { CreateChat } from './pages/CreateChat';
 const cookies = new Cookies();
 
@@ -44,7 +43,7 @@ function App() {
       <Routes>
         <Route path="/" exact Component={SelectChat}/>
         <Route path="/create/" Component={CreateChat}/>
-        <Route path="/chats/" Component={ChatsPage}/>
+        <Route path="/chats/" Component={ChatPage}/>
       </Routes>
       <SignOut onSignOut={handleSignOut}/>
     </div>

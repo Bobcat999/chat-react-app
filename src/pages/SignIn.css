@@ -16,8 +16,8 @@
     font-size: 2rem;
     border-radius: .5rem;
     border: none;
-    background-color: rgb(41, 118, 213);
-    color: white;
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
     padding: .5rem;
 }
 
