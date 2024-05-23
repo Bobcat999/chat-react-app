@@ -1,0 +1,21 @@
+.chat-select-card{
+    background-color: var(--clr-dark);
+    border-radius: .5rem;
+    width: 90%;
+    margin: 0 auto;
+    height: fit-content;
+    font-size: 1.5rem;
+    border: none;
+    text-decoration: none;
+
+    transition: all .5s;
+}
+
+.chat-select-card:hover{
+    box-shadow: 0px 0px 16px #000000;
+    transform: scale(1.2);
+}
+
+.chat-name{
+    color: var(--clr-white);
+}

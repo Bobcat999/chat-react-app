@@ -6,12 +6,11 @@ import { Messages } from '../components/Messages';
 import { TextBox } from '../components/TextBox';
 import { auth, db, provider } from ".././utils/firebase";
 import { addDoc, collection, serverTimestamp, onSnapshot, query, orderBy, where, getDoc, doc } from "firebase/firestore";
+import { createChatData, createMessageData } from '../utils/ChatDataObjects';
 
 export const ChatPage = () => {
   const [chatId, setChatId] = useState(null);
-  const [chatData, setChatData] = useState({
-    chatName: " "
-  });
+  const [chatData, setChatData] = useState(createChatData());
   const [loadedMessages, setLoadedMessages] = useState([]);
   const location = useLocation();
 
@@ -57,12 +56,7 @@ export const ChatPage = () => {
   const handleMessageSent = async (message) => {
     if (message === '') return;
 
-    const messageData = {
-      content: message,
-      createdAt: serverTimestamp(),
-      chatId,
-      user: auth.currentUser.displayName
-    }
+    const messageData = createMessageData(message, chatId, auth.currentUser.displayName);
     await addDoc(getMessagesRef(), messageData);
   }
 

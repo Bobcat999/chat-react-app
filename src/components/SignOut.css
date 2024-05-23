@@ -9,6 +9,7 @@
     padding: .5rem;
     margin: .5rem;
     border: none;
+    z-index: 1;
 
     transition: all .5s;
 }

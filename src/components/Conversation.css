@@ -1,8 +1,7 @@
-.chat-page{
-    background-color: var(--clr-dark);
+.conversation{
+    background-color: rgb(66, 66, 66);
     display: flex;
     flex-direction: column;
     justify-content: stretch;
     height: 100vh;
-    width: 100vw;
 }

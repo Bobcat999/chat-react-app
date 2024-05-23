@@ -16,5 +16,5 @@
 .text-box:not([value=""]){
     box-shadow: 0px 0px 8px rgb(43, 43, 43);
     outline: none;
-    width: 40%;
+    width: 80%;
 }

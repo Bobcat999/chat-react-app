@@ -1,43 +1,41 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './SelectChat.css';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { collection, getDoc, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../utils/firebase';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { collection, getDoc, getDocs, onSnapshot, query, where } from 'firebase/firestore';
+import { auth, db } from '../utils/firebase';
+import { ChatSelectCard } from '../components/ChatSelectCard';
 
-export const SelectChat = ({onSetChat}) => {
-    const [chat, setChat] = useState('');
-    const location = useLocation();
-    const navagate = useNavigate();
+export const SelectChat = ({ onSetChat }) => {
+    const [loadedChats, setLoadedChats] = useState([]);
 
-    const handleChatSelect = async (event) => {
-        if(event.key === 'Enter'){
-            //query chats
-            const queryChats = await getDocs(query(collection(db, "chats"),
-            where("chatName", "==", chat)));
-            if(queryChats.docs.length !== 0){
-                const chatId = queryChats.docs.at(0).id;
-                const searchParams = new URLSearchParams(location.search);
-                searchParams.set('chatId', String(chatId));
-                navagate("/chats/?"+searchParams);
-            }else{
-                navagate("/create");
-            }
-            resetTextBox();
-        }
-    }
-
-    const resetTextBox = () => {
-        setChat('');
-    }
-
-    const handleChange = (event) => {
-        setChat(event.target.value);
-    }
+    //load chats
+    useEffect(() => {
+            //loading messages
+            const queryChats = query(collection(db, "chats"));
+                //where("members", 'array-contains', auth.currentUser.email));
+            const unsubscribe = onSnapshot(queryChats, (snapshot) => {
+                let chats = [];
+                snapshot.forEach((doc) => {
+                    chats.push({ ...doc.data(), id: doc.id });
+                });
+                setLoadedChats(chats);
+            })
+            return () => unsubscribe();
+    }, []);
 
     return (
         <div className='select-chat'>
-            Select Chat
-            <input className='chat-box' type="text" value={chat} onChange={handleChange} onKeyDown={handleChatSelect}/>
+            <div> Select Chat </div>
+            <h3>Your Chats:</h3>
+            <div className='loaded-chats'>
+            {
+                loadedChats.map((chatData) => {
+                    return <ChatSelectCard chatData={chatData} />
+                })
+            }
+            </div>
+            <Link className={'create-chat-btn'} to={"/create"}>Create Chat</Link>
         </div>
     );
+    // <input className='chat-box' type="text" value={chat} onChange={handleChange} onKeyDown={handleChatSelect}/>
 }

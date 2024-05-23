@@ -3,6 +3,7 @@ import './CreateChat.css';
 import { addDoc, collection, doc } from 'firebase/firestore';
 import { auth, db } from '../utils/firebase';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { createChatData } from '../utils/ChatDataObjects';
 
 export const CreateChat = () => {
     const [chat, setChat] = useState('');
@@ -15,11 +16,9 @@ export const CreateChat = () => {
         if(event.key === 'Enter'){
             console.log(chat);
             if(chat === '') return;
-            const newChat = {
-                chatName: chat,
-                owner: auth.currentUser.displayName
-            }
-            const chatRef = await addDoc(chatsRef, newChat);
+            const newChat = createChatData(chat, auth.currentUser.email);
+            console.log(newChat);
+            const chatRef = await addDoc(chatsRef, Object.assign({}, newChat));
             const searchParams = new URLSearchParams(location.search);
             searchParams.set('chatId', String(chatRef.id));
             navagate("/chats/?"+searchParams);
