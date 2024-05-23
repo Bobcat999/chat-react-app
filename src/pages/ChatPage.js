@@ -7,6 +7,7 @@ import { TextBox } from '../components/TextBox';
 import { auth, db, provider } from ".././utils/firebase";
 import { addDoc, collection, serverTimestamp, onSnapshot, query, orderBy, where, getDoc, doc } from "firebase/firestore";
 import { createChatData, createMessageData } from '../utils/ChatDataObjects';
+import { InviteModal } from '../components/InviteModal';
 
 export const ChatPage = () => {
   const [chatId, setChatId] = useState(null);
@@ -59,10 +60,11 @@ export const ChatPage = () => {
     const messageData = createMessageData(message, chatId, auth.currentUser.displayName);
     await addDoc(getMessagesRef(), messageData);
   }
+      //<InviteModal chatData={chatData} chatId={chatId}/>
 
   return (
     <div className="chat-page">
-      <ChatHeader chatName={chatData.chatName} />
+      <ChatHeader chatData={chatData} />
       <Messages messages={loadedMessages} user={auth.currentUser} />
       <TextBox onMessageSend={handleMessageSent} />
     </div>

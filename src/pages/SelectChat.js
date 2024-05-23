@@ -11,8 +11,8 @@ export const SelectChat = ({ onSetChat }) => {
     //load chats
     useEffect(() => {
             //loading messages
-            const queryChats = query(collection(db, "chats"));
-                //where("members", 'array-contains', auth.currentUser.email));
+            const queryChats = query(collection(db, "chats"),//);
+                where("members", 'array-contains', auth.currentUser.email));
             const unsubscribe = onSnapshot(queryChats, (snapshot) => {
                 let chats = [];
                 snapshot.forEach((doc) => {
