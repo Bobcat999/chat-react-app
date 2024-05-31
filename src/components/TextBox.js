@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import './TextBox.css';
 
-export const TextBox = ({onMessageSend}) => {
+export const TextBox = ({onMessageSend, placeholder}) => {
     const [message, setMessage] = useState('');
 
     const handleMessageSent = (event) => {

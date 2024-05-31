@@ -23,3 +23,35 @@
     margin: 0 auto;
     font-size: 1rem;
 }
+
+.chat-actions{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    right: .5rem;
+    padding: 1rem;
+}
+
+.chat-actions button{
+    font-size: 1rem;
+    background-color: var(--clr-dark);
+    color: var(--clr-white);
+    border: none;
+    border-radius: .5em;
+}
+
+.back-button{
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    padding: .3em;
+    background-color: var(--clr-dark);
+    color: var(--clr-white);
+    border: none;
+    border-radius: .5em;
+    font-size: 1rem;
+    text-decoration: none;
+    z-index: 1;
+}

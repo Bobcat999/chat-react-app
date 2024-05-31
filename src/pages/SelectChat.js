@@ -10,18 +10,28 @@ export const SelectChat = ({ onSetChat }) => {
 
     //load chats
     useEffect(() => {
-            //loading messages
-            const queryChats = query(collection(db, "chats"),//);
-                where("members", 'array-contains', auth.currentUser.email));
-            const unsubscribe = onSnapshot(queryChats, (snapshot) => {
-                let chats = [];
-                snapshot.forEach((doc) => {
-                    chats.push({ ...doc.data(), id: doc.id });
+        const unsubscribeAuth = auth.onAuthStateChanged(user => {
+            if (user) {
+                // User is signed in.
+                const queryChats = query(
+                    collection(db, "chats"),
+                    where("members", 'array-contains', user.email)
+                );
+                const unsubscribeChats = onSnapshot(queryChats, snapshot => {
+                    let chats = [];
+                    snapshot.forEach((doc) => {
+                        chats.push({ ...doc.data(), id: doc.id });
+                    });
+                    setLoadedChats(chats);
                 });
-                setLoadedChats(chats);
-            })
-            return () => unsubscribe();
-    }, []);
+                return () => unsubscribeChats();
+            } else {
+                // User is signed out.
+                setLoadedChats([]); // Clear chats
+            }
+        });
+        return () => unsubscribeAuth();
+    }, [auth.currentUser]);
 
     return (
         <div className='select-chat'>
